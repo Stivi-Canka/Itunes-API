@@ -1,0 +1,10 @@
+import requests
+import sys
+import json
+
+if sys.argv != 2:
+    sys.exit()
+
+request = requests.get(f"https://itunes.apple.com/search?entity=song&limit=1&term={sys.argv[1:]}")
+
+print(request.json())

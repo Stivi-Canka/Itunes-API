@@ -1,10 +1,15 @@
 import requests
-import sys
 import json
+import sys
 
-if sys.argv != 2:
-    sys.exit()
+artist = input("Which artist would you like to search? ")
+number = input("How many song names would you like to know? ")
 
-request = requests.get(f"https://itunes.apple.com/search?entity=song&limit=1&term={sys.argv[1:]}")
+response = requests.get(f"https://itunes.apple.com/search?entity=song&limit={number}&term={artist}").json()
 
-print(request.json())
+def song_name_generator():
+    print(f"Here are {number} songs from {artist}:")
+    for item in response["results"]:
+        print(item["trackName"])
+
+song_name_generator()
